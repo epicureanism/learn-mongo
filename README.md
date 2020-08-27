@@ -64,11 +64,13 @@ Refer the sub documents in the original document, using references.
 - Do complex aggregation in the schema.
 
 ## Query
-The following equivalent SQL where clause is 'where viewed>10 AND (by = 'tutorials point' OR title = 'MongoDB Overview')'
+The following equivalent SQL where clause is 'select title from mycollections where viewed>10 AND (by = 'tutorials point' OR title = 'MongoDB Overview')'
 ```js
-db.mycol.find({
-	"viewed": {$gt:10}, 
-	$or: [
+db.mycollections.find(
+	{
+	  "viewed": {$gt:10}, 
+	  $or: [
 		{"by": "tutorials point"},
-   		{"title": "MongoDB Overview"}]})
+   		{"title": "MongoDB Overview"}]},
+	{ title: 1}) //1 for show; 0 for hide
 ```
